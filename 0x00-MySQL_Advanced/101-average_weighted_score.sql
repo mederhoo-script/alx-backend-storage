@@ -1,4 +1,4 @@
--- creates a stored procedure ComputeAverageWeightedScoreForUsers
+-- a SQL script that creates a stored procedure ComputeAverageWeightedScoreForUser that computes and store the average weighted score for a student.
 -- that computes and stores the average weighted score for all students
 
 DROP PROCEDURE IF EXISTS ComputeAverageWeightedScoreForUsers;
