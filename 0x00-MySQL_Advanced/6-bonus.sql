@@ -1,4 +1,4 @@
--- Script that creates a stored procedure AddBonus
+-- A SQL Script that creates a stored procedure AddBonus
 -- that adds a new correction for a student.
 DELIMITER $$ ;
 CREATE PROCEDURE AddBonus(
