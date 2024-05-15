@@ -30,7 +30,7 @@ def track_url_access(method):
 
 
 @track_url_access
-def fetch_page(url: str) -> str:
+def get_page(url: str) -> str:
     """Fetches and returns the HTML content of a URL"""
     response = requests.get(url)
     return response.text
