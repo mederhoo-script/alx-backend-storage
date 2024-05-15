@@ -8,6 +8,7 @@ from uuid import uuid4
 from typing import Union, Callable, Optional
 from functools import wraps
 
+
 def count_calls(method: Callable) -> Callable:
     '''Decorator to count how many times methods of Cache class are called'''
     key = method.__qualname__
@@ -20,8 +21,11 @@ def count_calls(method: Callable) -> Callable:
         return method(self, *args, **kwargs)
     return wrapper
 
+
 def call_history(method: Callable) -> Callable:
-    '''Decorator to store the history of inputs and outputs for a particular function'''
+    '''Decorator to store the history of inputs and
+    outputs for a particular function
+    '''
     @wraps(method)
     def wrapper(self, *args, **kwargs):
         '''Wrap the decorated function and return the wrapper'''
@@ -33,6 +37,7 @@ def call_history(method: Callable) -> Callable:
         self._redis.rpush(method.__qualname__ + ":outputs", output)
         return output
     return wrapper
+
 
 def replay(fn: Callable):
     '''Function to display the history of calls of a particular function.'''
@@ -59,6 +64,7 @@ def replay(fn: Callable):
             outp = ""
         print("{}(*{}) -> {}".format(func_name, inp, outp))
 
+
 class Cache:
     '''Cache class for storing data in Redis with call tracking and history'''
     def __init__(self):
@@ -74,8 +80,12 @@ class Cache:
         self._redis.set(rkey, data)
         return rkey
 
-    def get(self, key: str, fn: Optional[Callable] = None) -> Union[str, bytes, int, float]:
-        '''Retrieve data from Redis and optionally apply a conversion function'''
+    def get(self,
+            key: str,
+            fn: Optional[Callable] = None) -> Union[str, bytes, int, float]:
+        '''Retrieve data from Redis and optionally apply
+        a conversion function
+        '''
         value = self._redis.get(key)
         if fn:
             value = fn(value)
@@ -94,6 +104,7 @@ class Cache:
         except Exception:
             value = 0
         return value
+
 
 if __name__ == "__main__":
     cache = Cache()
